@@ -1,0 +1,4 @@
+reports
+src
+jacoco.exec
+.DS_Store
