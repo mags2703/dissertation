@@ -1,5 +1,6 @@
 import type { Request, Response, NextFunction } from 'express';
 import config from '../config/config.js';
+import { breaksRules } from '../services/Guardrails.js';
 
 export const promptModel = async (
   req: Request,
@@ -8,6 +9,12 @@ export const promptModel = async (
 ) => {
   try {
     const prompt = req.body.prompt;
+
+    if (await breaksRules(prompt)) {
+      console.log('GUARDRAIL TRIGGERED');
+      res.json({ output: 'Sorry I cannot help with that query' });
+      return;
+    }
     config.testHistory.push({
       role: 'user',
       content: [
