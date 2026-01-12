@@ -47,7 +47,7 @@ export const promptModel = async (
     ].join('\n');
 
     const code = splitResponse.slice(firstIndex + 1, lastIndex).join('\n');
-    config.answerCode = code;
+    config.solutionCode = code;
 
     console.log(apiResponse.output_text);
     res.json({ output: fixedResponse });

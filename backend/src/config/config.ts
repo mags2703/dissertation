@@ -5,11 +5,12 @@ import { solutionSystemPrompt, testSystemPrompt } from './prompts.js';
 interface Config {
   port: number;
   testPath: string;
-  answerCode?: string;
+  solutionCode?: string;
   testCode?: string;
   openAIClient: OpenAI;
   solutionHistory: ResponseInput;
   testHistory: ResponseInput;
+  activeProblem: number;
 }
 
 const openAIClient = new OpenAI({
@@ -42,12 +43,13 @@ const testHistory: ResponseInput = [
 
 const config: Config = {
   port: 3000,
-  answerCode: '',
+  solutionCode: '',
   testCode: '',
   testPath: process.env.TESTPATH!,
   openAIClient,
   solutionHistory,
   testHistory,
+  activeProblem: 0,
 };
 
 export default config;

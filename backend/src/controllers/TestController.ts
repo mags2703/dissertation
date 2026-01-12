@@ -14,7 +14,7 @@ export const runTest = async (
   try {
     await fs.writeFile(
       path.join(config.testPath, 'src', 'Solution.java'),
-      config.answerCode!
+      config.solutionCode!
     );
 
     await fs.writeFile(
