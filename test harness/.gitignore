@@ -2,3 +2,6 @@ reports
 src
 jacoco.exec
 .DS_Store
+Solution.class
+SolutionTest.class
+SolutionTest.java

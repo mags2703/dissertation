@@ -49,7 +49,7 @@ const config: Config = {
   openAIClient,
   solutionHistory,
   testHistory,
-  activeProblem: 0,
+  activeProblem: 1,
 };
 
 export default config;
