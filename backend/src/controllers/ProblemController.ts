@@ -40,15 +40,24 @@ export const changeActiveProblem = async (
   next: NextFunction
 ) => {
   try {
-    const problem = req.body.problem;
-    config.activeProblem = problem;
+    const problemID = req.body.problem;
+    config.activeProblem = problemID;
+    const problem = problems.find(
+      (problem) => problem.id == config.activeProblem
+    );
+    console.log(
+      solutionSystemPrompt.replaceAll('__FUNCTIONHEADER__', problem!.header)
+    );
     config.solutionHistory = [
       {
         role: 'system',
         content: [
           {
             type: 'input_text',
-            text: solutionSystemPrompt,
+            text: solutionSystemPrompt.replaceAll(
+              '__FUNCTIONHEADER__',
+              problem!.header
+            ),
           },
         ],
       },
@@ -60,7 +69,10 @@ export const changeActiveProblem = async (
         content: [
           {
             type: 'input_text',
-            text: testSystemPrompt,
+            text: testSystemPrompt.replaceAll(
+              '__FUNCTIONHEADER__',
+              problem!.header
+            ),
           },
         ],
       },
@@ -69,7 +81,7 @@ export const changeActiveProblem = async (
     config.solutionCode = '';
     config.testCode = '';
     res.json({
-      problem: problems.find((problem) => problem.id == config.activeProblem),
+      problem,
     });
   } catch (error) {
     next(error);
