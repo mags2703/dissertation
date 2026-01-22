@@ -7,16 +7,16 @@ import { Parser } from 'xml2js';
 
 const retrieveCoverage = async (
   parser: Parser,
-  srcPath: string,
-  reportPath: string
+  classPath: string,
+  fileName: string
 ) => {
   execSync(
-    `java -jar lib/jacococli.jar report jacoco.exec --classfiles ${srcPath}/Solution.class --sourcefiles . --xml ${reportPath}/coverage.xml`,
+    `java -jar lib/jacococli.jar report ${fileName}.exec --classfiles ${classPath}/Solution.class --sourcefiles . --xml reports/${fileName}/coverage.xml`,
     { cwd: config.testPath }
   );
 
   const coverageXml = await fs.readFile(
-    path.join(config.testPath, 'reports', 'coverage.xml'),
+    path.join(config.testPath, 'reports', fileName, 'coverage.xml'),
     { encoding: 'utf8' }
   );
 
@@ -46,12 +46,12 @@ const retrieveCoverage = async (
 
 const retrieveTestDetails = async (
   parser: Parser,
-  srcPath: string,
-  reportPath: string
+  classPath: string,
+  fileName: string
 ) => {
   await new Promise((resolve, _reject) => {
     exec(
-      `java -javaagent:lib/jacocoagent.jar=destfile=jacoco.exec -jar lib/junit.jar --class-path ${srcPath} --scan-class-path --reports-dir ${reportPath}`,
+      `java -javaagent:lib/jacocoagent.jar=destfile=${fileName}.exec -jar lib/junit.jar --class-path ${classPath} --select-class SolutionTest --reports-dir reports/${fileName}`,
       { cwd: config.testPath, encoding: 'utf8' },
       (err, stdout, stderr) => {
         resolve({ err, stdout, stderr });
@@ -60,7 +60,7 @@ const retrieveTestDetails = async (
   });
 
   const testXml = await fs.readFile(
-    path.join(config.testPath, reportPath, 'TEST-junit-jupiter.xml'),
+    path.join(config.testPath, 'reports', fileName, 'TEST-junit-jupiter.xml'),
     { encoding: 'utf8' }
   );
 
@@ -86,62 +86,85 @@ const retrieveTestDetails = async (
   return tests;
 };
 
+const getResults = async (
+  parser: Parser,
+  solutionFolder: string,
+  testFolder: string
+) => {
+  const solutionLabel = solutionFolder === 'user' ? 'userS' : 'instructorS';
+  const testLabel = testFolder === 'user' ? 'userT' : 'instructorT';
+
+  const tests = await retrieveTestDetails(
+    parser,
+    `lib:solutions/${solutionFolder}:tests/${testFolder}`,
+    `${solutionLabel}_${testLabel}`
+  );
+  const coverage = await retrieveCoverage(
+    parser,
+    `solutions/${solutionFolder}`,
+    `${solutionLabel}_${testLabel}`
+  );
+  return { tests, coverage };
+};
+
 export const runTest = async (
   req: Request,
   res: Response,
   next: NextFunction
 ) => {
   const parser = new Parser({ mergeAttrs: true, explicitArray: true });
+  const solutionsFolder = path.join(config.testPath, 'solutions');
+  const testsFolder = path.join(config.testPath, 'tests');
+
   try {
     await fs.writeFile(
-      path.join(config.testPath, 'src', 'Solution.java'),
+      path.join(solutionsFolder, 'user', 'Solution.java'),
       config.solutionCode!
     );
 
     await fs.writeFile(
-      path.join(config.testPath, 'src', 'SolutionTest.java'),
+      path.join(testsFolder, 'user', 'SolutionTest.java'),
       config.testCode!
     );
 
-    await fs.writeFile(
-      path.join(
-        config.testPath,
-        'solutions',
-        config.activeProblem.toString(),
-        'SolutionTest.java'
-      ),
-      config.testCode!
-    );
-
-    execSync('javac -cp lib/junit.jar src/*.java', { cwd: config.testPath });
     execSync(
-      `javac -cp lib/junit.jar solutions/${config.activeProblem}/*.java`,
-      { cwd: config.testPath }
+      'javac -cp lib/junit.jar solutions/user/*.java tests/user/*.java',
+      {
+        cwd: config.testPath,
+      }
+    );
+    execSync(
+      `javac -cp lib/junit.jar solutions/${config.activeProblem}/*.java tests/${config.activeProblem}/*.java`,
+      {
+        cwd: config.testPath,
+      }
     );
 
-    const userTests = await retrieveTestDetails(parser, 'src', 'reports');
-    const userCoverage = await retrieveCoverage(parser, 'src', 'reports');
-
-    const providedPath = path.join(
-      'solutions',
+    const userUser = await getResults(parser, 'user', 'user');
+    const instructorUser = await getResults(
+      parser,
+      config.activeProblem.toString(),
+      'user'
+    );
+    const userInstructor = await getResults(
+      parser,
+      'user',
       config.activeProblem.toString()
     );
-
-    const providedTests = await retrieveTestDetails(
+    const instructorInstructor = await getResults(
       parser,
-      providedPath,
-      path.join(providedPath, 'reports')
+      config.activeProblem.toString(),
+      config.activeProblem.toString()
     );
-    const providedCoverage = await retrieveTestDetails(
-      parser,
-      providedPath,
-      path.join(providedPath, 'reports')
-    );
-
-    console.log(userTests);
     res.json({
-      user: { tests: userTests, coverage: userCoverage },
-      provided: { tests: providedTests, coverage: providedCoverage },
+      userTestResults: {
+        user: userUser,
+        instructor: instructorUser,
+      },
+      instructorTestResults: {
+        user: userInstructor,
+        instructor: instructorInstructor,
+      },
     });
   } catch (error) {
     next(error);

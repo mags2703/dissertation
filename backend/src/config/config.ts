@@ -1,6 +1,7 @@
 import OpenAI from 'openai';
 import type { ResponseInput } from 'openai/resources/responses/responses.js';
 import { solutionSystemPrompt, testSystemPrompt } from './prompts.js';
+import problems from './problems.js';
 
 interface Config {
   port: number;
@@ -17,13 +18,18 @@ const openAIClient = new OpenAI({
   apiKey: process.env.OPENAI_API_KEY,
 });
 
+const defaultProblem = 1;
+
 const solutionHistory: ResponseInput = [
   {
     role: 'system',
     content: [
       {
         type: 'input_text',
-        text: solutionSystemPrompt,
+        text: solutionSystemPrompt.replaceAll(
+          '__FUNCTIONHEADER__',
+          problems[defaultProblem]!.header
+        ),
       },
     ],
   },
@@ -35,7 +41,10 @@ const testHistory: ResponseInput = [
     content: [
       {
         type: 'input_text',
-        text: testSystemPrompt,
+        text: testSystemPrompt.replaceAll(
+          '__FUNCTIONHEADER__',
+          problems[defaultProblem]!.header
+        ),
       },
     ],
   },
