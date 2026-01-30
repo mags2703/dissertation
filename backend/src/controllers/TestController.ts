@@ -4,6 +4,7 @@ import fs from 'fs/promises';
 import path from 'path';
 import { exec, execSync } from 'child_process';
 import { Parser } from 'xml2js';
+import { inputOutputMapper } from '../services/InputOutputMapper.js';
 
 const retrieveCoverage = async (
   parser: Parser,
@@ -166,6 +167,19 @@ export const runTest = async (
         instructor: instructorInstructor,
       },
     });
+  } catch (error) {
+    next(error);
+  }
+};
+
+export const getMappings = async (
+  req: Request,
+  res: Response,
+  next: NextFunction,
+) => {
+  try {
+    const mapping = JSON.parse(await inputOutputMapper());
+    res.json(mapping);
   } catch (error) {
     next(error);
   }
