@@ -1,0 +1,45 @@
+[
+  {
+    "url": "problem/active",
+    "type": "POST",
+    "body": {
+      "problem": 0
+    }
+  },
+  {
+    "url": "solution",
+    "type": "POST",
+    "body": {
+      "prompt": "return a divided by b times 2"
+    }
+  },
+  {
+    "url": "test",
+    "type": "POST",
+    "body": {
+      "prompt": "2 and 4 should return 0.25"
+    }
+  },
+  {
+    "url": "testharness",
+    "type": "GET"
+  },
+  {
+    "url": "solution",
+    "type": "POST",
+    "body": {
+      "prompt": "instead of a being divided by b times 2, instead divide it by b squared"
+    }
+  },
+  {
+    "url": "test",
+    "type": "POST",
+    "body": {
+      "prompt": "replace the first test with 2 and 4 should return 1/8"
+    }
+  },
+  {
+    "url": "testharness",
+    "type": "GET"
+  }
+]

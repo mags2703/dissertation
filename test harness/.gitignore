@@ -5,3 +5,7 @@ jacoco.exec
 Solution.class
 SolutionTest.class
 SolutionTest.java
+instructorS_instructorT.exec
+instructorS_userT.exec
+userS_instructorT.exec
+userS_userT.exec

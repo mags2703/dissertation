@@ -8,16 +8,16 @@ import { Parser } from 'xml2js';
 const retrieveCoverage = async (
   parser: Parser,
   classPath: string,
-  fileName: string
+  fileName: string,
 ) => {
   execSync(
     `java -jar lib/jacococli.jar report ${fileName}.exec --classfiles ${classPath}/Solution.class --sourcefiles . --xml reports/${fileName}/coverage.xml`,
-    { cwd: config.testPath }
+    { cwd: config.testPath },
   );
 
   const coverageXml = await fs.readFile(
     path.join(config.testPath, 'reports', fileName, 'coverage.xml'),
-    { encoding: 'utf8' }
+    { encoding: 'utf8' },
   );
 
   const coverageJson = await new Promise((resolve, reject) => {
@@ -47,7 +47,7 @@ const retrieveCoverage = async (
 const retrieveTestDetails = async (
   parser: Parser,
   classPath: string,
-  fileName: string
+  fileName: string,
 ) => {
   await new Promise((resolve, _reject) => {
     exec(
@@ -55,13 +55,13 @@ const retrieveTestDetails = async (
       { cwd: config.testPath, encoding: 'utf8' },
       (err, stdout, stderr) => {
         resolve({ err, stdout, stderr });
-      }
+      },
     );
   });
 
   const testXml = await fs.readFile(
     path.join(config.testPath, 'reports', fileName, 'TEST-junit-jupiter.xml'),
-    { encoding: 'utf8' }
+    { encoding: 'utf8' },
   );
 
   const output = await new Promise((resolve, reject) => {
@@ -89,7 +89,7 @@ const retrieveTestDetails = async (
 const getResults = async (
   parser: Parser,
   solutionFolder: string,
-  testFolder: string
+  testFolder: string,
 ) => {
   const solutionLabel = solutionFolder === 'user' ? 'userS' : 'instructorS';
   const testLabel = testFolder === 'user' ? 'userT' : 'instructorT';
@@ -97,12 +97,12 @@ const getResults = async (
   const tests = await retrieveTestDetails(
     parser,
     `lib:solutions/${solutionFolder}:tests/${testFolder}`,
-    `${solutionLabel}_${testLabel}`
+    `${solutionLabel}_${testLabel}`,
   );
   const coverage = await retrieveCoverage(
     parser,
     `solutions/${solutionFolder}`,
-    `${solutionLabel}_${testLabel}`
+    `${solutionLabel}_${testLabel}`,
   );
   return { tests, coverage };
 };
@@ -110,7 +110,7 @@ const getResults = async (
 export const runTest = async (
   req: Request,
   res: Response,
-  next: NextFunction
+  next: NextFunction,
 ) => {
   const parser = new Parser({ mergeAttrs: true, explicitArray: true });
   const solutionsFolder = path.join(config.testPath, 'solutions');
@@ -119,42 +119,42 @@ export const runTest = async (
   try {
     await fs.writeFile(
       path.join(solutionsFolder, 'user', 'Solution.java'),
-      config.solutionCode!
+      config.solutionCode!,
     );
 
     await fs.writeFile(
       path.join(testsFolder, 'user', 'SolutionTest.java'),
-      config.testCode!
+      config.testCode!,
     );
 
     execSync(
       'javac -cp lib/junit.jar solutions/user/*.java tests/user/*.java',
       {
         cwd: config.testPath,
-      }
+      },
     );
     execSync(
       `javac -cp lib/junit.jar solutions/${config.activeProblem}/*.java tests/${config.activeProblem}/*.java`,
       {
         cwd: config.testPath,
-      }
+      },
     );
 
     const userUser = await getResults(parser, 'user', 'user');
     const instructorUser = await getResults(
       parser,
       config.activeProblem.toString(),
-      'user'
+      'user',
     );
     const userInstructor = await getResults(
       parser,
       'user',
-      config.activeProblem.toString()
+      config.activeProblem.toString(),
     );
     const instructorInstructor = await getResults(
       parser,
       config.activeProblem.toString(),
-      config.activeProblem.toString()
+      config.activeProblem.toString(),
     );
     res.json({
       userTestResults: {

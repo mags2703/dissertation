@@ -1,0 +1,34 @@
+[
+  {
+    "url": "problem/active",
+    "type": "POST",
+    "body": {
+      "problem": 0
+    }
+  },
+  {
+    "url": "solution",
+    "type": "POST",
+    "body": {
+      "prompt": "return a divided by b squared"
+    }
+  },
+  {
+    "url": "test",
+    "type": "POST",
+    "body": {
+      "prompt": "1 and 1 should return 1"
+    }
+  },
+  {
+    "url": "test",
+    "type": "POST",
+    "body": {
+      "prompt": "8 and 2 should return 2"
+    }
+  },
+  {
+    "url": "testharness",
+    "type": "GET"
+  }
+]
