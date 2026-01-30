@@ -141,22 +141,25 @@ export const runTest = async (
       },
     );
 
-    const userUser = await getResults(parser, 'user', 'user');
-    const instructorUser = await getResults(
-      parser,
-      config.activeProblem.toString(),
-      'user',
-    );
-    const userInstructor = await getResults(
-      parser,
-      'user',
-      config.activeProblem.toString(),
-    );
+    const userUser =
+      !config.solutionCode || !config.testCode
+        ? {}
+        : await getResults(parser, 'user', 'user');
+
+    const instructorUser = !config.testCode
+      ? {}
+      : await getResults(parser, config.activeProblem.toString(), 'user');
+
+    const userInstructor = !config.solutionCode
+      ? {}
+      : await getResults(parser, 'user', config.activeProblem.toString());
+
     const instructorInstructor = await getResults(
       parser,
       config.activeProblem.toString(),
       config.activeProblem.toString(),
     );
+
     res.json({
       userTestResults: {
         user: userUser,
