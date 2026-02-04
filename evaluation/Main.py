@@ -22,9 +22,10 @@ def run_script(problem, file):
 
         print("RESPONSE:", response.json())
         print("")
+    print(requests.get(base_url + test_harness_url + "/mappings").json())
 
 
 if __name__ == "__main__":
     # run_script("0", "Good.json")
-    run_script("0", "Malicious.json")
+    run_script("0", "Good.json")
 

@@ -5,7 +5,7 @@ import { breaksRules } from '../services/Guardrails.js';
 export const promptModel = async (
   req: Request,
   res: Response,
-  next: NextFunction
+  next: NextFunction,
 ) => {
   try {
     const prompt = req.body.prompt;
@@ -43,10 +43,10 @@ export const promptModel = async (
 
     const splitResponse = apiResponse.output_text.split('\n');
     const firstIndex = splitResponse.findIndex((line) =>
-      line.includes('<OUTPUT>')
+      line.includes('<OUTPUT>'),
     );
     const lastIndex = splitResponse.findIndex((line) =>
-      line.includes('</OUTPUT>')
+      line.includes('</OUTPUT>'),
     );
     const fixedResponse = [
       ...splitResponse.slice(0, firstIndex),
