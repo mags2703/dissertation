@@ -93,8 +93,7 @@ export function ChatInterface() {
     <div className="flex flex-col h-full bg-background">
       {/* Header */}
       <div className="border-b border-border p-4">
-        <h2 className="text-sm font-semibold text-foreground">Assistant</h2>
-        <p className="text-xs text-muted-foreground">Solving Two Sum</p>
+        <h2 className="text-sm font-semibold text-foreground">Chats</h2>
       </div>
 
       {/* Tabs */}

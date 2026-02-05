@@ -49,6 +49,7 @@ export default function Home() {
   const [selectedProblemId, setSelectedProblemId] = useState('0');
   const [testData, setTestData] = useState(mockTestData);
   const [selectedProblem, setSelectedProblem] = useState({});
+  const [testMappings, setTestMappings] = useState([]);
   const handleRunTests = async () => {
     try {
       const data = await fetchTestData();
@@ -71,9 +72,16 @@ export default function Home() {
   }, [selectedProblemId]);
 
   const fetchTestData = async () => {
-    const res = await axios.get('http://localhost:3000/api/testharness');
-    setTestData(res.data);
-    return res.data;
+    const testResults = await axios.get(
+      'http://localhost:3000/api/testharness',
+    );
+    setTestData(testResults.data);
+
+    const testMappings = await axios.get(
+      'http://localhost:3000/api/testharness/mappings',
+    );
+    setTestMappings(testMappings.data);
+    return testResults.data;
   };
 
   const fetchProblems = async () => {
@@ -122,7 +130,7 @@ export default function Home() {
           <div className="flex-1 overflow-auto border-t border-border">
             <TestCases
               data={testData}
-              inputOutput={mockInputOutput}
+              inputOutput={testMappings}
               onRunTests={handleRunTests}
             />
           </div>

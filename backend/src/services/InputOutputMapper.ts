@@ -30,11 +30,11 @@ const questionPrompt = (code: string) => {
     
   example of resulting json:
   {
-    "test1": {
+    "test1()": {
       "input": "(0.5, 0.1)"
       "output": "0.6"
     },
-    "test2": {
+    "test2()": {
       "input": "(1, 1)"
       "output": "2"
     }
