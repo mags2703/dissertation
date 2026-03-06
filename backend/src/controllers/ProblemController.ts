@@ -6,7 +6,7 @@ import { solutionSystemPrompt, testSystemPrompt } from '../config/prompts.js';
 export const getProblems = async (
   req: Request,
   res: Response,
-  next: NextFunction
+  next: NextFunction,
 ) => {
   try {
     res.json({
@@ -23,7 +23,7 @@ export const getProblems = async (
 export const getActiveProblem = async (
   req: Request,
   res: Response,
-  next: NextFunction
+  next: NextFunction,
 ) => {
   try {
     res.json({
@@ -37,16 +37,17 @@ export const getActiveProblem = async (
 export const changeActiveProblem = async (
   req: Request,
   res: Response,
-  next: NextFunction
+  next: NextFunction,
 ) => {
   try {
+    // TODO: Handle error scenario (if activeProblem does not exist)
     const problemID = req.body.problem;
     config.activeProblem = problemID;
     const problem = problems.find(
-      (problem) => problem.id == config.activeProblem
+      (problem) => problem.id == config.activeProblem,
     );
     console.log(
-      solutionSystemPrompt.replaceAll('__FUNCTIONHEADER__', problem!.header)
+      solutionSystemPrompt.replaceAll('__FUNCTIONHEADER__', problem!.header),
     );
     config.solutionHistory = [
       {
@@ -56,7 +57,7 @@ export const changeActiveProblem = async (
             type: 'input_text',
             text: solutionSystemPrompt.replaceAll(
               '__FUNCTIONHEADER__',
-              problem!.header
+              problem!.header,
             ),
           },
         ],
@@ -71,7 +72,7 @@ export const changeActiveProblem = async (
             type: 'input_text',
             text: testSystemPrompt.replaceAll(
               '__FUNCTIONHEADER__',
-              problem!.header
+              problem!.header,
             ),
           },
         ],

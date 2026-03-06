@@ -28,7 +28,7 @@ const stoppingDistance: Problem = {
   id: 2,
   title: 'Stopping Distance Calculator',
   description:
-    'Write a function to compute how long it would take in metres to stop a vehicle based on the speed that it is travelling at (in kilometres per hour) and the reaction time of the driver (in seconds).  The stopping distance is to be computed as the sum of the reaction distance (which is the speed in metres per second times the reaction time in seconds) and the braking distance (which is the square of the speed in metres per second divided by 20).',
+    'Write a function to compute how long it would take in metres to stop a vehicle based on the speed that it is travelling at (in kilometres per hour) and the reaction time of the driver (in seconds).  The stopping distance is to be computed as the sum of the reaction distance (which is the speed in metres per second times the reaction time in seconds) and the braking distance (which is the square of the speed in metres per second divided by 20). Speed is a. Reaction time is b',
   params: 2,
   header: 'double func(double a, double b)',
 };
@@ -36,10 +36,10 @@ const stoppingDistance: Problem = {
 const advancedStoppingDistance: Problem = {
   id: 3,
   title: 'Advanced Stopping Distance Calculator',
-  description: `Write a program in Java (and call it StoppingDistance2) to compute how long it would take in metres to stop a vehicle based on
-		1. the speed that it is travelling at (in kilometres per hour),
-		2. the age of the driver,
-		3. whether the road is wet or dry.
+  description: `Write a function to compute how long it would take in metres to stop a vehicle based on
+		a. the speed that it is travelling at (in kilometres per hour),
+		b. the age of the driver,
+		c. whether the road is wet or dry (wet is true, dry is false).
 
     Assume that the reaction time of the driver (in seconds) is 2.0 seconds if the driver is less than 50 years old, is 2.5 seconds if the driver is between 50 and 59 years old, and is 3.0 seconds if the driver is 60 or older.
     The braking distance is the square of the speed of the vehicle (in kilometres per hour) divided by 250 times the coefficient of friction.

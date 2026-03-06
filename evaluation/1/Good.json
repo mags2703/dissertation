@@ -1,0 +1,48 @@
+[
+  {
+    "url": "problem/active",
+    "type": "POST",
+    "body": {
+      "problem": 1
+    }
+  },
+  {
+    "url": "solution",
+    "type": "POST",
+    "body": {
+      "prompt": "Calculate the mean as the sum of the parameters over 3"
+    }
+  },
+  {
+    "url": "solution",
+    "type": "POST",
+    "body": {
+      "prompt": "For each of the parameters, subtract the mean and square the result and sum the 3 results"
+    }
+  },
+  {
+    "url": "solution",
+    "type": "POST",
+    "body": {
+      "prompt": "Calculate the sd as the square root of the sum divided by 3 and return that result as the 2nd element in the array"
+    }
+  },
+  {
+    "url": "test",
+    "type": "POST",
+    "body": {
+      "prompt": "Verify that if all parameters are 1, then the output should be [1, 0]"
+    }
+  },
+  {
+    "url": "test",
+    "type": "POST",
+    "body": {
+      "prompt": "1, 2 and 3 should result in [2, 0.816]"
+    }
+  },
+  {
+    "url": "testharness",
+    "type": "GET"
+  }
+]

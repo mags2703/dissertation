@@ -1,8 +1,8 @@
 export const solutionSystemPrompt = `You are to write code that goes inside func() in the following class:
 \`\`\`java
 public class Solution {
-public __FUNCTIONHEADER__{
-}
+    public __FUNCTIONHEADER__{
+    }
 }
 \`\`\`
 Only create the function given and do not change the parameters or types
@@ -17,22 +17,22 @@ Prompt 1: return a + b
 Response 1:
 <OUTPUT>
 public class Solution {
-public double func(int a, int b){
-return a + b;
-}
+    public double func(int a, int b) {
+        return a + b;
+    }
 }
 </OUTPUT>
 The function now returns the result of a + b
 
-Prompt 1 if a equals b return 0
+Prompt 2: if a equals b return 0
 Response 2:
 <OUTPUT>
 public class Solution {
-public double func(int a, int b){
-if (a == b)
-return 0;
-return a + b;
-}
+    public double func(int a, int b) {
+        if (a == b)
+            return 0;
+        return a + b;
+    }
 }
 </OUTPUT>
 The function now returns 0 if a equals b`;
@@ -57,11 +57,11 @@ Response 1:
 <OUTPUT>
 import org.junit.jupiter.api.Test; import static org.junit.jupiter.api.Assertions.*;
 class SolutionTest {
-@test
-void test1 {
-Solution solution = new Solution();
-assertEquals(2, solution.func(1,1));
-}
+    @test
+    void test1 {
+        Solution solution = new Solution();
+        assertEquals(2, solution.func(1,1));
+    }
 }
 </OUTPUT>
 Added a test to verify that inputs 1 and 1 give an output of 2
@@ -71,16 +71,16 @@ Response 2:
 <OUTPUT>
 import org.junit.jupiter.api.Test; import static org.junit.jupiter.api.Assertions.*;
 class SolutionTest {
-@test
-void test1 {
-Solution solution = new Solution();
-assertEquals(2, solution.func(1,1));
-}
-@test
-void test2 {
-Solution solution = new Solution();
-assertEquals(4, solution.func(2,2));
-}
+    @test
+    void test1 {
+        Solution solution = new Solution();
+        assertEquals(2, solution.func(1,1));
+    }
+    @test
+    void test2 {
+        Solution solution = new Solution();
+        assertEquals(4, solution.func(2,2));
+    }
 }
 </OUTPUT>
 Added a test to verify that inputs 2 and 2 give an output of 4

@@ -18,7 +18,7 @@ const openAIClient = new OpenAI({
   apiKey: process.env.OPENAI_API_KEY,
 });
 
-const defaultProblem = 1;
+const defaultProblem = 0;
 
 const solutionHistory: ResponseInput = [
   {
@@ -28,7 +28,7 @@ const solutionHistory: ResponseInput = [
         type: 'input_text',
         text: solutionSystemPrompt.replaceAll(
           '__FUNCTIONHEADER__',
-          problems[defaultProblem]!.header
+          problems[defaultProblem]!.header,
         ),
       },
     ],
@@ -43,7 +43,7 @@ const testHistory: ResponseInput = [
         type: 'input_text',
         text: testSystemPrompt.replaceAll(
           '__FUNCTIONHEADER__',
-          problems[defaultProblem]!.header
+          problems[defaultProblem]!.header,
         ),
       },
     ],
@@ -58,7 +58,7 @@ const config: Config = {
   openAIClient,
   solutionHistory,
   testHistory,
-  activeProblem: 1,
+  activeProblem: 0,
 };
 
 export default config;

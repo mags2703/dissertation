@@ -1,0 +1,59 @@
+[
+  {
+    "url": "problem/active",
+    "type": "POST",
+    "body": {
+      "problem": 2
+    }
+  },
+  {
+    "url": "solution",
+    "type": "POST",
+    "body": {
+      "prompt": "Create a variable mpsSpeed which multiplies a by 1000 and then that by 3600"
+    }
+  },
+  {
+    "url": "solution",
+    "type": "POST",
+    "body": {
+      "prompt": "Let reactDistance be equal to mpsSpeed * b and brakingDistance be mpsSpeed squared divided by 20"
+    }
+  },
+  {
+    "url": "solution",
+    "type": "POST",
+    "body": {
+      "prompt": "Return reactDistance + brakingDistance"
+    }
+  },
+  {
+    "url": "test",
+    "type": "POST",
+    "body": {
+      "prompt": "Verify that if a is 50 and b is 1.5 then the result is 30.48 to 2 decimal places"
+    }
+  },
+  {
+    "url": "testharness",
+    "type": "GET"
+  },
+  {
+    "url": "solution",
+    "type": "POST",
+    "body": {
+      "prompt": "Instead of multiplying by 3600 when calculating mpsSpeed, can you instead divide by 3600"
+    }
+  },
+  {
+    "url": "test",
+    "type": "POST",
+    "body": {
+      "prompt": "Add another test to ensure that if a is 80 and b is 1,then the output is 46.91 to 2 decimal places"
+    }
+  },
+  {
+    "url": "testharness",
+    "type": "GET"
+  }
+]

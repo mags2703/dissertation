@@ -1,0 +1,55 @@
+[
+  {
+    "url": "problem/active",
+    "type": "POST",
+    "body": {
+      "problem": 3
+    }
+  },
+  {
+    "url": "solution",
+    "type": "POST",
+    "body": {
+      "prompt": "Create a variable mpsSpeed which multiplies a by 1000 and then divides that by 3600"
+    }
+  },
+  {
+    "url": "solution",
+    "type": "POST",
+    "body": {
+      "prompt": "Create a reactionTime variable that is 2 if b is less than 50, 2.5 if between 50 and 59 inclusive and 3 if 60 and above"
+    }
+  },
+  {
+    "url": "solution",
+    "type": "POST",
+    "body": {
+      "prompt": "Create a brakingDistance variable that is a divided by 250*f all squared where f is 0.4 if c is true and 0.8 if false"
+    }
+  },
+  {
+    "url": "solution",
+    "type": "POST",
+    "body": {
+      "prompt": "Return mpsSpeed * reactiontime + brakingDistance"
+    }
+  },
+  {
+    "url": "test",
+    "type": "POST",
+    "body": {
+      "prompt": "Verify that if a is 40 and b is 40  and c is true then the result is 27.78 within 2 decimal places"
+    }
+  },
+  {
+    "url": "test",
+    "type": "POST",
+    "body": {
+      "prompt": "Add another test to ensure that if a is 0 and b is 30 and c is false then the output is 0 within 2 decimal places"
+    }
+  },
+  {
+    "url": "testharness",
+    "type": "GET"
+  }
+]

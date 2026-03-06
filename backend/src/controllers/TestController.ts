@@ -50,7 +50,7 @@ const retrieveTestDetails = async (
   classPath: string,
   fileName: string,
 ) => {
-  await new Promise((resolve, _reject) => {
+  await new Promise((resolve) => {
     exec(
       `java -javaagent:lib/jacocoagent.jar=destfile=${fileName}.exec -jar lib/junit.jar --class-path ${classPath} --select-class SolutionTest --reports-dir reports/${fileName}`,
       { cwd: config.testPath, encoding: 'utf8' },
