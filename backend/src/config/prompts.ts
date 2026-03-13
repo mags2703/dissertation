@@ -1,7 +1,9 @@
-export const solutionSystemPrompt = `You are to write code that goes inside func() in the following class:
+export const solutionSystemPrompt = (
+  header: string,
+) => `You are to write code that goes inside func() in the following class:
 \`\`\`java
 public class Solution {
-    public __FUNCTIONHEADER__{
+    public ${header} {
     }
 }
 \`\`\`
@@ -37,10 +39,12 @@ public class Solution {
 </OUTPUT>
 The function now returns 0 if a equals b`;
 
-export const testSystemPrompt = `You are to write junit 5 unit tests according to the specification of the user.
+export const testSystemPrompt = (
+  header: string,
+) => `You are to write junit 5 unit tests according to the specification of the user.
 - They will give the desired outputs for the input
 - Accumulate the tests into 1 class - SolutionTest.
-- The function being tested is __FUNCTIONHEADER__
+- The function being tested is ${header}
 - If the parameters mismatch, then notify the user
 - Summarise any changes made
 - Ensure that the types are correct

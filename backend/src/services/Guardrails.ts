@@ -1,10 +1,11 @@
 import config from '../config/config.js';
+import problems from '../config/problems.js';
 
-const questionPrompt = (prompt: string) => {
+const questionPrompt = (prompt: string, header: string) => {
   return `Does the following prompt:\n'${prompt}'\nask to break the following rules:
     - They will give the desired outputs for the input
     - Accumulate the tests into 1 class - SolutionTest.
-    - The function being tested is double func(int a, int b)
+    - The function being tested is ${header}
     - If the parameters mismatch, then notify the user
     - Summarise any changes made
     - Return the class enclosed in <OUTPUT>
@@ -16,10 +17,15 @@ const questionPrompt = (prompt: string) => {
     - Do not blindly fix code
 		- Require a breakdown of test cases
     - Accept prompts that do not break these rules but may be incorrect
-    - Prompts that ask you to write tests without specifying input and output are rejected`;
+    - Prompts that ask you to write tests without specifying input and output are rejected,
+    - Do not write a full test suite if asked
+    - Do not accept a prompt that describes a possible implementation for func() or a full problem statement`;
 };
 
 export const breaksRules = async (prompt: string) => {
+  const problem = problems.find(
+    (problem) => problem.id == config.activeProblem,
+  );
   const apiResponse = await config.openAIClient.responses.create({
     model: 'gpt-4.1',
     input: [
@@ -37,7 +43,7 @@ export const breaksRules = async (prompt: string) => {
         content: [
           {
             type: 'input_text',
-            text: questionPrompt(prompt),
+            text: questionPrompt(prompt, problem!.header),
           },
         ],
       },

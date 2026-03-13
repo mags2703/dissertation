@@ -40,25 +40,22 @@ export const changeActiveProblem = async (
   next: NextFunction,
 ) => {
   try {
-    // TODO: Handle error scenario (if activeProblem does not exist)
     const problemID = req.body.problem;
+    const problem = problems.find((problem) => problem.id == problemID);
+
+    if (!problem) {
+      throw Error(`Problem ID ${problemID} not found`);
+    }
+
     config.activeProblem = problemID;
-    const problem = problems.find(
-      (problem) => problem.id == config.activeProblem,
-    );
-    console.log(
-      solutionSystemPrompt.replaceAll('__FUNCTIONHEADER__', problem!.header),
-    );
+
     config.solutionHistory = [
       {
         role: 'system',
         content: [
           {
             type: 'input_text',
-            text: solutionSystemPrompt.replaceAll(
-              '__FUNCTIONHEADER__',
-              problem!.header,
-            ),
+            text: solutionSystemPrompt(problem.header),
           },
         ],
       },
@@ -70,10 +67,7 @@ export const changeActiveProblem = async (
         content: [
           {
             type: 'input_text',
-            text: testSystemPrompt.replaceAll(
-              '__FUNCTIONHEADER__',
-              problem!.header,
-            ),
+            text: testSystemPrompt(problem.header),
           },
         ],
       },

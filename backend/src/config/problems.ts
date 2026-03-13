@@ -42,7 +42,7 @@ const advancedStoppingDistance: Problem = {
 		c. whether the road is wet or dry (wet is true, dry is false).
 
     Assume that the reaction time of the driver (in seconds) is 2.0 seconds if the driver is less than 50 years old, is 2.5 seconds if the driver is between 50 and 59 years old, and is 3.0 seconds if the driver is 60 or older.
-    The braking distance is the square of the speed of the vehicle (in kilometres per hour) divided by 250 times the coefficient of friction.
+    The braking distance is the speed of the vehicle (in kilometres per hour) squared divided by 250 times the coefficient of friction.
     You may assume that the vehicle is travelling on a tarmac road and that the coefficient of friction for a tarmac road is 0.8 if the road is dry and 0.4 if the road is wet.
     The stopping distance is to be computed as the sum of the reaction distance (which is the speed in metres per second times the reaction time in seconds) and the braking distance.`,
   params: 3,

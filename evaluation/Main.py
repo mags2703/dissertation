@@ -38,7 +38,7 @@ def run_script(problem, file):
             passed = sum(test['passed'] for test in tests)
             total = len(tests)
 
-            avg_coverage = (sum(coverage_dict.values()) / 5) * 100
+            avg_coverage = (sum(coverage_dict.values()) / len(coverage_dict.values())) * 100
 
             result.append((f"{passed}/{total}", f"{avg_coverage}%"))
 
@@ -50,5 +50,5 @@ def run_script(problem, file):
 
 if __name__ == "__main__":
     # run_script("0", "Good.json")
-    run_script("3", "Good.json")
+    run_script("2", "Malicious.json")
 

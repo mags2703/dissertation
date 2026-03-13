@@ -26,10 +26,7 @@ const solutionHistory: ResponseInput = [
     content: [
       {
         type: 'input_text',
-        text: solutionSystemPrompt.replaceAll(
-          '__FUNCTIONHEADER__',
-          problems[defaultProblem]!.header,
-        ),
+        text: solutionSystemPrompt(problems[defaultProblem]!.header),
       },
     ],
   },
@@ -41,10 +38,7 @@ const testHistory: ResponseInput = [
     content: [
       {
         type: 'input_text',
-        text: testSystemPrompt.replaceAll(
-          '__FUNCTIONHEADER__',
-          problems[defaultProblem]!.header,
-        ),
+        text: testSystemPrompt(problems[defaultProblem]!.header),
       },
     ],
   },

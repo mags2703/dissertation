@@ -17,7 +17,7 @@
     "url": "solution",
     "type": "POST",
     "body": {
-      "prompt": "Create a reactionTime variable that is 2 if b is less than 50, 2.5 if between 50 and 59 inclusive and 3 if 60 and above"
+      "prompt": "Create a reactionTime variable that is 2 if b is less than 30, 2.5 if between 30 and 59 inclusive and 3 in any other case"
     }
   },
   {
@@ -51,6 +51,13 @@
   {
     "url": "testharness",
     "type": "GET"
+  },
+  {
+    "url": "solution",
+    "type": "POST",
+    "body": {
+      "prompt": "reactionTime is actually 2 if b is less than 50, 2.5 if between 50 and 59 inclusive and 3 if 60 and above"
+    }
   },
   {
     "url": "test",
