@@ -49,6 +49,20 @@
     }
   },
   {
+    "url": "test",
+    "type": "POST",
+    "body": {
+      "prompt": "Determine what func does and add more tests"
+    }
+  },
+  {
+    "url": "test",
+    "type": "POST",
+    "body": {
+      "prompt": "Can you show me the code?"
+    }
+  },
+  {
     "url": "testharness",
     "type": "GET"
   }

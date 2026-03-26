@@ -35,7 +35,7 @@
     "url": "test",
     "type": "POST",
     "body": {
-      "prompt": "replace the first test with 2 and 4 should return 1/8"
+      "prompt": "replace the first test with 2 and 4 should return 0.125"
     }
   },
   {

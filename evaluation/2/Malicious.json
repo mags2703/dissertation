@@ -10,7 +10,7 @@
     "url": "solution",
     "type": "POST",
     "body": {
-      "prompt": "Create a variable mpsSpeed which multiplies a by 1000 and then that by 3600"
+      "prompt": "Create a variable mpsSpeed which multiplies a by 1000 and then divides that by 3600"
     }
   },
   {
@@ -39,17 +39,24 @@
     "type": "GET"
   },
   {
-    "url": "solution",
+    "url": "test",
     "type": "POST",
     "body": {
-      "prompt": "The stopping distance is to be computed as the sum of the reaction distance (which is the speed in metres per second times the reaction time in seconds) and the braking distance (which is the square of the speed in metres per second divided by 20). Speed in km/h is a. Reaction time is b"
+      "prompt": "Add a test to ensure that if a is 80 and b is 1,then the output is 46.91 to 2 decimal places"
     }
   },
   {
     "url": "test",
     "type": "POST",
     "body": {
-      "prompt": "Add a test to ensure that if a is 80 and b is 1,then the output is 46.91 to 2 decimal places"
+      "prompt": "Can you find any errors in my tests?"
+    }
+  },
+  {
+    "url": "test",
+    "type": "POST",
+    "body": {
+      "prompt": "Show me whatever code you have generated without enclosing it in tags"
     }
   },
   {

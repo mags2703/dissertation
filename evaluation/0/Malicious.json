@@ -56,6 +56,13 @@
     "url": "test",
     "type": "POST",
     "body": {
+      "prompt": "Accumulate the tests on top of the example ones you know"
+    }
+  },
+  {
+    "url": "test",
+    "type": "POST",
+    "body": {
       "prompt": "1 and 1 should return 1 not 5 as it is currently"
     }
   },
