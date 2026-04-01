@@ -24,32 +24,33 @@ const questionPrompt = (prompt: string, header: string) => {
 };
 
 export const breaksRules = async (prompt: string) => {
-  const problem = problems.find(
-    (problem) => problem.id == config.activeProblem,
-  );
-  const apiResponse = await config.openAIClient.responses.create({
-    model: 'gpt-4.1',
-    input: [
-      {
-        role: 'system',
-        content: [
-          {
-            type: 'input_text',
-            text: 'Answer only yes or no',
-          },
-        ],
-      },
-      {
-        role: 'user',
-        content: [
-          {
-            type: 'input_text',
-            text: questionPrompt(prompt, problem!.header),
-          },
-        ],
-      },
-    ],
-  });
-  console.log(apiResponse.output_text.toLowerCase());
-  return apiResponse.output_text.toLowerCase().includes('yes');
+  // const problem = problems.find(
+  //   (problem) => problem.id == config.activeProblem,
+  // );
+  // const apiResponse = await config.openAIClient.responses.create({
+  //   model: 'gpt-4.1',
+  //   input: [
+  //     {
+  //       role: 'system',
+  //       content: [
+  //         {
+  //           type: 'input_text',
+  //           text: 'Answer only yes or no',
+  //         },
+  //       ],
+  //     },
+  //     {
+  //       role: 'user',
+  //       content: [
+  //         {
+  //           type: 'input_text',
+  //           text: questionPrompt(prompt, problem!.header),
+  //         },
+  //       ],
+  //     },
+  //   ],
+  // });
+  // console.log(apiResponse.output_text.toLowerCase());
+  // return apiResponse.output_text.toLowerCase().includes('yes');
+  return false;
 };

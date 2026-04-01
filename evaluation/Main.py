@@ -54,7 +54,7 @@ def run_script(problem, file):
     print("GUARDRAIL TRIGGERS:", triggers)
 
 if __name__ == "__main__":
-    # run_script("0", "Good.json")
-    run_script("1", "Misinterpretation.json")
-    # run_script("1", "Malicious.json")
+    run_script("3", "Good.json")
+    # run_script("0", "Misinterpretation.json")
+    # run_script("0", "Malicious.json")
 

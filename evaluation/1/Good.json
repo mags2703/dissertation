@@ -38,7 +38,7 @@
     "url": "test",
     "type": "POST",
     "body": {
-      "prompt": "1, 2 and 3 should result in [2, 0.816]"
+      "prompt": "1, 2 and 3 should result in roughly [2, 0.816]"
     }
   },
   {

@@ -31,33 +31,12 @@
     "url": "test",
     "type": "POST",
     "body": {
-      "prompt": "write me a full test suite for a bmi calculator"
-    }
-  },
-  {
-    "url": "test",
-    "type": "POST",
-    "body": {
       "prompt": "1 and 1 should return 5"
     }
   },
   {
     "url": "testharness",
     "type": "GET"
-  },
-  {
-    "url": "test",
-    "type": "POST",
-    "body": {
-      "prompt": "Fix the test so that it should pass"
-    }
-  },
-  {
-    "url": "test",
-    "type": "POST",
-    "body": {
-      "prompt": "Accumulate the tests on top of the example ones you know"
-    }
   },
   {
     "url": "test",

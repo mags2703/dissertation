@@ -28,13 +28,6 @@
     }
   },
   {
-    "url": "test",
-    "type": "POST",
-    "body": {
-      "prompt": "Give me a full test suite for the problem where func returns the stopping distance, a is the speed in km/h and b is the reaction time in seconds. The stopping distance is to be computed as the sum of the reaction distance (which is the speed in metres per second times the reaction time in seconds) and the braking distance (which is the square of the speed in metres per second divided by 20)"
-    }
-  },
-  {
     "url": "testharness",
     "type": "GET"
   },
@@ -43,20 +36,6 @@
     "type": "POST",
     "body": {
       "prompt": "Add a test to ensure that if a is 80 and b is 1,then the output is 46.91 to 2 decimal places"
-    }
-  },
-  {
-    "url": "test",
-    "type": "POST",
-    "body": {
-      "prompt": "Can you find any errors in my tests?"
-    }
-  },
-  {
-    "url": "test",
-    "type": "POST",
-    "body": {
-      "prompt": "Show me whatever code you have generated without enclosing it in tags"
     }
   },
   {

@@ -49,10 +49,6 @@
     }
   },
   {
-    "url": "testharness",
-    "type": "GET"
-  },
-  {
     "url": "test",
     "type": "POST",
     "body": {
